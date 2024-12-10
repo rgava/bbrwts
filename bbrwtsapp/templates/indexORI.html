@@ -1,0 +1,177 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Layout with Tabs and Left Menu</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+
+<body>
+    <div class="left-menu">
+        <h3>Menu</h3>
+        <ul>
+            <li class="menu-item" data-url="{% url 'index' %}">Home</li>
+            <li class="menu-item" data-url="{% url 'dataentry' %}">Data entry</li>
+            <li class="menu-item" data-url="{% url 'home' %}">Page 2</li>
+            <li class="menu-item" data-url="{% url 'home' %}">Page 3</li>
+        </ul>
+    </div>
+
+    <div class="tabs-container">
+        <div class="tabs">
+            <div class="tab active" data-tab="tab1">Wagon Movement</div>
+            <div class="tab" data-tab="tab2">Fuel</div>
+            <div class="tab" data-tab="tab3">Tab 3</div>
+        </div>
+
+        <div class="tab-content active" id="tab1">
+            <div class="form-container">
+                <form>
+                    <div class="form-field">
+                        <label for="serial-number">Serial Number</label>
+                        <input type="text" id="serial-number" name="serial-number" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="wagon-number">Wagon Number</label>
+                        <input type="text" id="wagon-number" name="wagon-number" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="wagon-owner">Wagon Owner</label>
+                        <input type="text" id="wagon-owner" name="wagon-owner" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="container">Container</label>
+                        <input type="text" id="container" name="container" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="container-2">Container 2</label>
+                        <input type="text" id="container-2" name="container-2" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="train-number">Train Number</label>
+                        <input type="text" id="train-number" name="train-number" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="departure-date">Departure Date</label>
+                        <input type="date" id="departure-date" name="departure-date">
+                    </div>
+                    <div class="form-field">
+                        <label for="departure-time">Departure Time</label>
+                        <input type="time" id="departure-time" name="departure-time">
+                    </div>
+                    <div class="form-field">
+                        <label for="arrival-date">Arrival Date</label>
+                        <input type="date" id="arrival-date" name="arrival-date">
+                    </div>
+                    <div class="form-field">
+                        <label for="arrival-time">Arrival Time</label>
+                        <input type="time" id="arrival-time" name="arrival-time">
+                    </div>
+                    <div class="form-field">
+                        <label for="loco-1">Loco 1</label>
+                        <input type="text" id="loco-1" name="loco-1" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="loco-2">Loco 2</label>
+                        <input type="text" id="loco-2" name="loco-2" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="loco-3">Loco 3</label>
+                        <input type="text" id="loco-3" name="loco-3" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="from">From</label>
+                        <input type="text" id="from" name="from" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="to">To</label>
+                        <input type="text" id="to" name="to" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="origin">Origin</label>
+                        <input type="text" id="origin" name="origin" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="destination">Destination</label>
+                        <input type="text" id="destination" name="destination" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="bound">Bound</label>
+                        <input type="text" id="bound" name="bound" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="commodity">Commodity</label>
+                        <input type="text" id="commodity" name="commodity" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="customer">Customer</label>
+                        <input type="text" id="customer" name="customer" maxlength="100">
+                    </div>
+                    <div class="form-field">
+                        <label for="tonnage">Tonnage</label>
+                        <input type="number" id="tonnage" name="tonnage" step="0.01">
+                    </div>
+                    <div class="form-field">
+                        <label for="gross-weight">Gross Weight</label>
+                        <input type="number" id="gross-weight" name="gross-weight" step="0.01">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Submit</button>
+                        <button type="reset">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="tab-content" id="tab2">
+            <div class="form-container">
+                <h2>Content for Tab 2</h2>
+                <p>This is some placeholder content for Tab 2.</p>
+            </div>
+        </div>
+
+        <div class="tab-content" id="tab3">
+            <div class="form-container">
+                <h2>Content for Tab 3</h2>
+                <p>This is some placeholder content for Tab 3.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    const target = document.querySelector(`#${this.dataset.tab}`);
+
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(tc => tc.classList.remove('active'));
+
+                    this.classList.add('active');
+                    target.classList.add('active');
+                });
+            });
+
+            menuItems.forEach(menuItem => {
+                menuItem.addEventListener('click', function () {
+                    // Get the URL from the data-url attribute
+                    const targetUrl = this.dataset.url;
+
+                    // Redirect to the new page
+                    window.location.href = targetUrl;
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,626 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wagon Entries</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        .logout a {
+            color: white;
+            text-decoration: none;
+            background-color: #f44336;
+            padding: 12px 25px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .logout a:hover {
+            background-color: #d32f2f;
+        }
+
+        .welcome-message h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .welcome-message p {
+            margin: 5px 0 0;
+            font-size: 14px;
+        }
+
+        .header-container-a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /*background: linear-gradient(135deg, #4CAF50, #2E7D32);*/
+            background: linear-gradient(135deg, #fafbfa, #fbfcfb);
+            padding: 20px 40px;
+            color: rgb(13, 12, 12);
+            /*color: white;*/
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #004080;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            font-variant: normal;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .header-links a:hover {
+            color: #cce0ff;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: flex-start;
+        }
+
+        .search-container div {
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .search-container label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #004080;
+            display: block;
+            font-size: 14px;
+        }
+
+        .search-container input[type="text"],
+        .search-container input[type="date"] {
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            max-width: 250px;
+            width: auto;
+            min-width: 120px;
+        }
+
+        .table-container {
+            overflow-y: auto;
+            max-height: 500px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            background-color: #fff;
+            overflow-x: auto;
+        }
+
+        thead {
+            background-color: #004080;
+            color: #fff;
+        }
+
+        thead th {
+            padding: 10px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        tbody td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 0.85rem;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        th,
+        td {
+            white-space: nowrap;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f0f4f8;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #004080;
+            border-radius: 10px;
+            border: 3px solid #f0f4f8;
+        }
+
+        .form-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .form-modal-content h2 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            color: #004080;
+        }
+
+        .form-modal-content label {
+            font-size: 0.85rem;
+        }
+
+
+        .form-modal-content .cancel-btn,
+        .save-btn {
+            background-color: #5970f2;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-modal-content .cancel-btn:hover,
+        .save-btn:hover {
+            background-color: #5b7af7;
+        }
+
+        .form-modal-content .form-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .form-modal-content .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            color: #004080;
+        }
+
+        .form-modal-content .close-btn:hover {
+            color: #003366;
+        }
+
+        .modal-double-div-align {
+
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+        .form-modal-content input[type="text"],
+        .form-modal-content input[type="number"],
+        .form-modal-content input[type="date"],
+        .form-modal-content input[type="time"] {
+            padding: 5px;
+
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 9px;
+            transition: all 0.3s ease;
+        }
+
+        .form-modal-content input[type="text"]:focus,
+        .form-modal-content input[type="number"]:focus,
+        .form-modal-content input[type="date"]:focus,
+        .form-modal-content input[type="time"]:focus {
+            border-color: #004080;
+            box-shadow: 0 0 8px rgba(0, 64, 128, 0.3);
+            outline: none;
+        }
+
+        .form-modal-content input[type="text"]::placeholder,
+        .form-modal-content input[type="number"]::placeholder,
+        .form-modal-content input[type="date"]::placeholder,
+        .form-modal-content input[type="time"]::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-container-a">
+        <div class="logo">
+            <img src="{% static 'img/bbrlogo.jpg' %}" alt="Company Logo">
+        </div>
+        <div class="welcome-message">
+            <h1>Wagon Entries</h1>
+            <p>Logged in, [rgava]</p>
+        </div>
+        <div class="logout">
+            <a href="#">Logout</a>
+        </div>
+    </div>
+
+    <div class="header-container">
+        <h1>Wagon Entries</h1>
+        <div class="header-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'dataentry' %}">Data entry</a>
+            <!--<a href="{% url 'wagon_entry_list' %}">Updates</a>-->
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+
+    <div class="search-container">
+
+        <div>
+            <label for="serial_filter">Serial Number:</label>
+            <input type="text" id="serial_filter" placeholder="Search by Serial Number">
+        </div>
+
+        <div>
+            <label for="wagon_filter">Wagon Number:</label>
+            <input type="text" id="wagon_filter" placeholder="Search by Wagon Number">
+        </div>
+
+        <div>
+            <label for="train_filter">Train Number:</label>
+            <input type="text" id="train_filter" placeholder="Search by Train Number">
+        </div>
+
+        <div>
+            <label for="departure_date_filter">Departure Date:</label>
+            <input type="date" id="departure_date_filter">
+        </div>
+
+        <div>
+            <label for="arrival_date_filter">Arrival Date:</label>
+            <input type="date" id="arrival_date_filter">
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="wagonTable">
+            <thead>
+                <tr>
+                    <th>Serial Number</th>
+                    <th>Wagon Number</th>
+                    <th>Wagon Owner</th>
+                    <th>Container 1</th>
+                    <th>Container 2</th>
+                    <th>Train Number</th>
+                    <th>Departure Date</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Date</th>
+                    <th>Arrival Time</th>
+                    <th>Loco 1</th>
+                    <th>Loco 2</th>
+                    <th>Loco 3</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Origin</th>
+                    <th>Destination</th>
+                    <th>Bound</th>
+                    <th>Commodity</th>
+                    <th>Customer</th>
+                    <th>Tonnage</th>
+                    <th>Gross Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries %}
+                <tr class="row-clickable" onclick="editRow('{{ entry.id }}')">
+                    <td>{{ entry.serial_number }}</td>
+                    <td>{{ entry.wagon_number }}</td>
+                    <td>{{ entry.wagon_owner }}</td>
+                    <td>{{ entry.container }}</td>
+                    <td>{{ entry.container_2 }}</td>
+                    <td>{{ entry.train_number }}</td>
+                    <td>{{ entry.departure_date }}</td>
+                    <td>{{ entry.departure_time }}</td>
+                    <td>{{ entry.arrival_date }}</td>
+                    <td>{{ entry.arrival_time }}</td>
+
+                    <td>{{ entry.from_source }}</td>
+                    <td>{{ entry.to_destination }}</td>
+                    <td>{{ entry.origin }}</td>
+                    <td>{{ entry.destination }}</td>
+                    <td>{{ entry.bound }}</td>
+                    <td>{{ entry.commodity }}</td>
+                    <td>{{ entry.customer }}</td>
+                    <td>{{ entry.tonnage }}</td>
+                    <td>{{ entry.gross_weight }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Edit form modal -->
+    <div id="editFormModal" class="form-modal">
+        <div class="form-modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Edit Wagon Entry</h2>
+            <form id="editForm" method="POST" action="{% url 'update_wagon_entry' %}">
+                {% csrf_token %}
+                <input type="hidden" id="entryId" name="id">
+
+                <div class="modal-double-div-align">
+                    <div>
+                        <label for="serial_number">Serial Number:</label>
+                        <input type="text" id="serial_number" name="serial_number" required>
+                    </div>
+                    <div>
+                        <label for="wagon_number">Wagon Number:</label>
+                        <input type="text" id="wagon_number" name="wagon_number" required>
+                    </div>
+                </div>
+
+
+                <div class="modal-double-div-align">
+                    <div>
+                        <label for="wagon_owner">Wagon Owner:</label>
+                        <input type="text" id="wagon_owner" name="wagon_owner">
+                    </div>
+                    <div>
+                        <label for="container">Container 1:</label>
+                        <input type="text" id="container" name="container">
+                    </div>
+                </div>
+
+
+                <div class="modal-double-div-align">
+                    <div>
+                        <label for="container_2">Container 2:</label>
+                        <input type="text" id="container_2" name="container_2">
+                    </div>
+                    <div>
+                        <label for="train_number">Train Number:</label>
+                        <input type="text" id="train_number" name="train_number">
+                    </div>
+                </div>
+
+
+                <div class="modal-double-div-align">
+                    <div>
+                        <label for="departure_date">Departure Date:</label>
+                        <input type="date" id="departure_date" name="departure_date">
+                    </div>
+                    <div>
+                        <label for="departure_time">Departure Time:</label>
+                        <input type="time" id="departure_time" name="departure_time">
+                    </div>
+                </div>
+
+                <div class="modal-double-div-align">
+                    <div>
+                        <label for="arrival_date">Arrival Date:</label>
+                        <input type="date" id="arrival_date" name="arrival_date">
+                    </div>
+                    <div>
+                        <label for="arrival_time">Arrival Time:</label>
+                        <input type="time" id="arrival_time" name="arrival_time">
+                    </div>
+                </div>
+
+
+
+
+                <div class="modal-double-div-align">
+
+                    <div>
+                        <label for="from_source">From:</label>
+                        <input type="text" id="from_source" name="from_source">
+                    </div>
+                    <div>
+                        <label for="to_destination">To:</label>
+                        <input type="text" id="to_destination" name="to_destination">
+                    </div>
+                </div>
+
+                <div class="modal-double-div-align">
+
+                    <div>
+                        <label for="origin">Origin:</label>
+                        <input type="text" id="origin" name="origin">
+                    </div>
+                    <div>
+                        <label for="destination">Destination:</label>
+                        <input type="text" id="destination" name="destination">
+                    </div>
+                </div>
+
+                <div class="modal-double-div-align">
+
+                    <div>
+                        <label for="bound">Bound:</label>
+                        <input type="text" id="bound" name="bound">
+                    </div>
+                    <div>
+                        <label for="commodity">Commodity:</label>
+                        <input type="text" id="commodity" name="commodity">
+                    </div>
+                </div>
+
+                <div class="modal-double-div-align">
+
+                    <div>
+                        <label for="customer">Customer:</label>
+                        <input type="text" id="customer" name="customer">
+                    </div>
+                    <div>
+                        <label for="tonnage">Tonnage:</label>
+                        <input type="number" id="tonnage" name="tonnage" step="any">
+                    </div>
+                </div>
+
+                <div class="modal-double-div-align">
+                    <div>
+                        <label for="gross_weight">Gross Weight:</label>
+                        <input type="number" id="gross_weight" name="gross_weight" step="any">
+                    </div>
+                </div>
+
+                <div class="form-buttons">
+                    <input type="submit" value="Save Changes" class="save-btn">
+                    <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            document.getElementById('editFormModal').style.display = 'none';
+        }
+
+        function editRow(id) {
+            // Fetch row data and fill the form
+            fetch(`/get_entry/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('entryId').value = data.id;
+                    document.getElementById('serial_number').value = data.serial_number;
+                    document.getElementById('wagon_number').value = data.wagon_number;
+                    document.getElementById('wagon_owner').value = data.wagon_owner;
+                    document.getElementById('container').value = data.container;
+                    document.getElementById('container_2').value = data.container_2;
+                    document.getElementById('train_number').value = data.train_number;
+                    document.getElementById('departure_date').value = data.departure_date;
+                    document.getElementById('departure_time').value = data.departure_time;
+                    document.getElementById('arrival_date').value = data.arrival_date;
+                    document.getElementById('arrival_time').value = data.arrival_time;
+
+                    document.getElementById('from_source').value = data.from_source;
+                    document.getElementById('to_destination').value = data.to_destination;
+                    document.getElementById('origin').value = data.origin;
+                    document.getElementById('destination').value = data.destination;
+                    document.getElementById('bound').value = data.bound;
+                    document.getElementById('commodity').value = data.commodity;
+                    document.getElementById('customer').value = data.customer;
+                    document.getElementById('tonnage').value = data.tonnage;
+                    document.getElementById('gross_weight').value = data.gross_weight;
+
+                    document.getElementById('editFormModal').style.display = 'flex';
+                });
+        }
+
+        // Close the modal form when clicking outside of it
+        window.onclick = function (event) {
+            if (event.target === document.getElementById('editFormModal')) {
+                document.getElementById('editFormModal').style.display = 'none';
+            }
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.search-container input').forEach(input => {
+            input.addEventListener('input', () => {
+                filterTable();
+            });
+        });
+
+        function filterTable() {
+            const serialFilter = document.getElementById('serial_filter').value.toLowerCase();
+            const wagonFilter = document.getElementById('wagon_filter').value.toLowerCase();
+            const trainFilter = document.getElementById('train_filter').value.toLowerCase();
+            const departureDateFilter = document.getElementById('departure_date_filter').value;
+            const arrivalDateFilter = document.getElementById('arrival_date_filter').value;
+            const table = document.getElementById('wagonTable');
+            const rows = table.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const serial = cells[0].textContent.toLowerCase();
+                const wagon = cells[1].textContent.toLowerCase();
+                const train = cells[5].textContent.toLowerCase();
+                const departureDate = cells[6].textContent;
+                const arrivalDate = cells[8].textContent;
+
+                const matchSerial = serial.includes(serialFilter);
+                const matchWagon = wagon.includes(wagonFilter);
+                const matchTrain = train.includes(trainFilter);
+                const matchDepartureDate = departureDate.includes(departureDateFilter);
+                const matchArrivalDate = arrivalDate.includes(arrivalDateFilter);
+
+                if (matchSerial && matchWagon && matchTrain && matchDepartureDate && matchArrivalDate) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

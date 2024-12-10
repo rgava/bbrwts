@@ -1,0 +1,602 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 0.85rem;
+}
+
+body,
+html {
+    height: 100%;
+    align-items: center;
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0px;
+    border-radius: 0;
+}
+
+.container {
+    margin-top: 50px;
+    width: 80vw;
+    height: 80vh;
+    background-color: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    padding-top: 10px;
+
+}
+
+.dropdown-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.dropdown-label {
+    color: #333;
+    font-size: 1rem;
+    padding: 5px;
+}
+
+.dropdown {
+    background-color: #ffffff;
+    border: 0px solid #ccc;
+    border-radius: 1px;
+    border-color: #ccc;
+    padding: 0px;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+    width: 200px;
+    text-align: center;
+    margin-right: 50px;
+}
+
+.dropdown:hover,
+.dropdown:focus {
+    border-color: #888;
+    outline: none;
+}
+
+.dropdown select {
+    width: 100%;
+    border: none;
+    background: none;
+    font-size: 0.9rem;
+    /*color: #333;*/
+    cursor: pointer;
+}
+
+.dropdown {
+    border-color: #ccc;
+
+}
+
+#status-dropdown {
+    /* Removes the border */
+    outline: none;
+
+}
+
+.top-box {
+    width: 100%;
+    height: 90%;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: #333;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.top-box .box-title {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 8px;
+    text-align: left;
+    width: 100%;
+}
+
+
+
+.box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #e0e0e0;
+    padding: 5px;
+    color: #333;
+    font-size: 1rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.box-header div {
+    width: 10%;
+    text-align: center;
+}
+
+.scrollable-content {
+    overflow-y: auto;
+    max-height: 100%;
+    width: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
+}
+
+.scrollable-content::-webkit-scrollbar {
+    width: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+
+
+#left-box,
+#locomotive-box,
+#right-box,
+#attached-locomotives-box {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.bottom-rowDELETE {
+    display: block;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aqua;
+}
+
+#left-box,
+#right-box {
+    height: 100%;
+    width: 100%;
+}
+
+#attached-locomotives-box {
+    height: 100%;
+    width: 100%;
+}
+
+.bottom-box {
+
+    width: 10%;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: #333;
+    font-size: 1.5rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.arrow-container {
+    display: flex;
+    gap: 10px;
+    /* Adds space between buttons */
+}
+
+.arrow-container button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    width: 15%;
+    /* Allows the button width to adjust to content */
+
+    /* Ensures a minimum consistent size */
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* flex: 1;*/
+    /* Makes all buttons take equal space */
+    text-align: center;
+    /* Centers the text */
+}
+
+.arrow-container button:hover {
+    background-color: #ccc;
+}
+
+.selectable,
+.attached-selectable,
+.unattached-selectable {
+    background-color: #ffffff;
+    color: #333;
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.selected {
+    background-color: #e0f7fa;
+
+}
+
+.wagon-number,
+.commodity,
+.tonnage,
+.container-1,
+.container-2,
+.customer,
+.net,
+.tar-weight,
+.origin,
+.destination,
+.projects,
+.train {
+    width: 10%;
+    text-align: center;
+}
+
+.loco {
+    width: 10%;
+    text-align: center;
+}
+
+.serial-no,
+.train-no,
+.from,
+.to,
+.dep-date,
+.dep-time,
+.arr-date,
+.arr-time,
+.status,
+.loco1,
+.loco2,
+.loco3 {
+    width: 10%;
+    text-align: center;
+}
+
+#status_location {
+    padding-bottom: 1px;
+    padding-top: 1px;
+    background-color: #fff;
+}
+
+#selected-train-label-div {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    /* vertical align not centre*/
+}
+
+#attach-wagon,
+#attach-locomotive,
+#view-train-entries {
+    background-color: dodgerblue;
+    padding: 5px;
+    margin-left: 2px;
+    margin-right: 5px;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 1rem;
+    text-decoration: none;
+
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    border: 1px solid #888;
+    width: 80vw;
+    height: 70vh;
+    /* Could be more or less, depending on screen size */
+    /*max-width: 500px;*/
+    /* Max width for larger screens */
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    border: none;
+    border-width: 1px;
+    border-radius: 4px;
+    position: relative;
+    /* Make the parent relative to allow absolute positioning of the child */
+}
+
+#unattached-div-buttons,
+#attached-div-buttons {
+    position: absolute;
+    /* Position the child div absolutely within the parent */
+    bottom: 0;
+    /* Align it to the bottom of the parent */
+    left: 0;
+    /* Optional: You can align it to the left if needed */
+    width: 100%;
+    /* Optional: Make the child div as wide as the parent */
+}
+
+.unattached-button,
+.attached-button {
+    margin: 7px;
+    padding: 7px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    width: auto;
+    /* Allows the button width to adjust to content */
+    min-width: 150px;
+    /* Ensures a minimum consistent size */
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    /* Makes all buttons take equal space */
+    text-align: center;
+    /* Centers the text */
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.close_transactions {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close_transactions:hover,
+.close_transactions:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Style the form */
+#editForm {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 0 auto;
+    width: 100%;
+    /* Adjust based on your modal width */
+}
+
+/* Style the input fields */
+#editForm input[type="text"],
+#editForm input[type="date"],
+#editForm input[type="time"],
+#editForm select {
+    width: 100%;
+    /* Full width of the form */
+    padding: 8px;
+
+    margin-bottom: 10px;
+    /* Spacing between inputs */
+    box-sizing: border-box;
+    /* Ensure padding doesn't affect width */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style the labels */
+#editForm label {
+    font-weight: normal;
+    margin-top: 3px;
+    display: block;
+    /* Make sure labels are above the inputs */
+}
+
+/* Style the submit and cancel buttons */
+#editForm .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+#editForm button {
+    padding: 10px 20px;
+
+    background-color: #4CAF50;
+    /* Green background */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#editForm button:hover {
+    background-color: #45a049;
+    /* Darker green on hover */
+}
+
+/* Style the cancel button */
+#editForm .cancel-btn {
+    background-color: #f44336;
+    /* Red background for cancel */
+}
+
+#editForm .cancel-btn:hover {
+    background-color: #d32f2f;
+    /* Darker red on hover */
+}
+
+/* Style for error messages */
+#editForm .error {
+    color: red;
+    margin-top: -5px;
+}
+
+/* Responsive form adjustments */
+@media screen and (max-width: 600px) {
+
+    #editForm input[type="text"],
+    #editForm input[type="date"],
+    #editForm input[type="time"],
+    #editForm select {
+        width: 100%;
+        /* Make input fields full width on smaller screens */
+    }
+}
+
+#serial_search {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.edit_form_div {
+    display: flex;
+    width: 100%;
+}
+
+.edit_form_sub_div {
+
+    width: 50%;
+}
+
+
+#view-attached-wagons,
+#view-attached-locomotives {
+    display: inline-block;
+    color: blue;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.header-links {
+    display: flex;
+    gap: 15px;
+}
+
+
+
+.header-links a:hover {
+    color: #cce0ff;
+}
+
+.header-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: normal;
+    transition: color 0.3s ease;
+}
+
+.header-container-a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*background: linear-gradient(135deg, #4CAF50, #2E7D32);*/
+    background: linear-gradient(135deg, #fafbfa, #fbfcfb);
+    padding: 20px 40px;
+    color: rgb(13, 12, 12);
+    /*color: white;*/
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px;
+    background-color: #004080;
+    color: #fff;
+    padding: 10px 5px;
+    border-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

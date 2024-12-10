@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Page with Sidebar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            padding-top: 20px;
+            position: fixed;
+            height: 100%;
+        }
+
+        .sidebar a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: white;
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <a href="#" onclick="loadContent('home')">Home</a>
+        <a href="#" onclick="loadContent('services')">Services</a>
+        <a href="#" onclick="loadContent('about')">About Us</a>
+        <a href="#" onclick="loadContent('contact')">Contact Us</a>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="content" id="content-area">
+        <h2>Welcome</h2>
+        <p>This is the default page content. Click on the menu items on the left to display different content.</p>
+    </div>
+
+    <script>
+        // Function to load different content in the right content area
+        function loadContent(page) {
+            const contentArea = document.getElementById('content-area');
+            let content = '';
+
+            if (page === 'home') {
+                content = `
+                    <h2>Home</h2>
+                    <p>Welcome to our homepage! Here you'll find an overview of our services and offerings.</p>
+                `;
+            } else if (page === 'services') {
+                content = `
+                    <h2>Our Services</h2>
+                    <p>We offer a wide range of professional services tailored to your needs.</p>
+                `;
+            } else if (page === 'about') {
+                content = `
+                    <h2>About Us</h2>
+                    <p>Learn more about our company's history, values, and team.</p>
+                `;
+            } else if (page === 'contact') {
+                content = `
+                    <h2>Contact Us</h2>
+                    <p>Feel free to reach out to us for inquiries or support.</p>
+                `;
+            }
+
+            contentArea.innerHTML = content;
+        }
+    </script>
+</body>
+</html>

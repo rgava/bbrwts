@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Layout with Tabs and Left Menu</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+
+<body>
+    <div class="left-menu">
+        <h3>Menu</h3>
+        <ul>
+            <li class="menu-item" data-url="{% url 'index' %}">Home</li>
+            <li class="menu-item" data-url="{% url 'dataentry' %}">Data entry</li>
+            <li class="menu-item" data-url="{% url 'gps' %}">GPS</li>
+        </ul>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            menuItems.forEach(menuItem => {
+                menuItem.addEventListener('click', function () {
+                    // Get the URL from the data-url attribute
+                    const targetUrl = this.dataset.url;
+
+                    // Redirect to the new page
+                    window.location.href = targetUrl;
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

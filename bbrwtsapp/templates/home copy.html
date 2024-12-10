@@ -1,0 +1,283 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wagon and Train Management System</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /*background: linear-gradient(135deg, #4CAF50, #2E7D32);*/
+            background: linear-gradient(135deg, #fafbfa, #fbfcfb);
+            padding: 20px 40px;
+            color: rgb(13, 12, 12);
+            /*color: white;*/
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        .welcome-message h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .welcome-message p {
+            margin: 5px 0 0;
+            font-size: 14px;
+        }
+
+        .logout a {
+            color: white;
+            text-decoration: none;
+            background-color: #f44336;
+            padding: 12px 25px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .logout a:hover {
+            background-color: #d32f2f;
+        }
+
+        .main-content {
+            padding: 20px 40px;
+        }
+
+        .quick-access {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .quick-link {
+            text-decoration: none;
+            background-color: #004080;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 2px;
+            transition: background-color 0.3s;
+        }
+
+        .quick-link:hover {
+            background-color: #1976D2;
+        }
+
+        .dashboard {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .widget {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+
+        .search-and-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: #4CAF50;
+            padding: 10px 20px;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navigation a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .operations-overview,
+        .user-tools,
+        .company-announcements {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 5px 0;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: #2196F3;
+        }
+
+        ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 20px 40px;
+        }
+
+        .footer-container a {
+            color: white;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .footer-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="{% static 'img/bbrlogo.jpg' %}" alt="Company Logo">
+            </div>
+            <div class="welcome-message">
+                <h1>Welcome to the Wagon and Train Management System</h1>
+                <p>Logged in, [rgava]</p>
+            </div>
+            <div class="logout">
+                <a href="#">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="quick-access">
+            <a href="#" class="quick-link">Tracking</a>
+            <a href="{% url 'movements' %}" class="quick-link">Movements</a>
+            <a href="{% url 'dataentry' %}" class="quick-link">Data entry</a>
+            <!-- <a href="{% url 'wagon_entry_list' %}" class="quick-link">Updates</a>-->
+            <a href="#" class="quick-link">Reports</a>
+            <a href="#" class="quick-link">GPS</a>
+        </div>
+
+        <div class="dashboard">
+            <div class="widget tracking-overview">
+                <h2>Tracking Overview</h2>
+                <p>Real-time status of wagons and trains</p>
+                <div id="map-container">
+                    <!-- Map or status overview would be embedded here -->
+                </div>
+            </div>
+
+            <div class="widget recent-reports">
+                <h2>Recent Reports</h2>
+                <ul>
+                    <li><a href="#">Report 1</a></li>
+                    <li><a href="#">Report 2</a></li>
+                    <li><a href="#">Report 3</a></li>
+                </ul>
+            </div>
+
+            <div class="widget alerts-notifications">
+                <h2>Alerts and Notifications</h2>
+                <p>No critical alerts at this time.</p>
+            </div>
+        </div>
+
+        <div class="search-and-navigation">
+            <div class="search-bar">
+                <input type="text" placeholder="Search for wagons, trains, or reports...">
+                <button>Search</button>
+            </div>
+
+
+        </div>
+
+        <div class="operations-overview">
+            <h2>Current Operations Overview</h2>
+            <p>Live updates on ongoing operations</p>
+            <ul>
+                <li>Train #123 currently in transit from [Location A] to [Location B]</li>
+                <li>Wagon #456 being loaded at [Location C]</li>
+                <li>Report #789 generated for [Operation Name]</li>
+            </ul>
+        </div>
+
+        <div class="user-tools">
+            <h2>User Tools and Resources</h2>
+            <ul>
+                <li><a href="#">Guides and Documentation</a></li>
+                <li><a href="#">Training Videos</a></li>
+                <li><a href="#">Support Contacts</a></li>
+            </ul>
+        </div>
+
+        <div class="company-announcements">
+            <h2>Company Announcements</h2>
+            <p>Upcoming system maintenance on [Date]</p>
+            <p>New features released: [Feature 1], [Feature 2]</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="quick-links">
+                <a href="#">Home</a>
+                <a href="#">Features</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="legal-info">
+                <p>&copy; [2024] [Beitbridge Bulawayo Railway]. All rights reserved.</p>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

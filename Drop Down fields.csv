@@ -1,0 +1,277 @@
+name,code
+Antenior,ANT
+Antenoir,ANT
+Batoka,BTK
+Baycon,BY
+Bayhead,BYD
+Bayhead Goedere,BYG
+Beaconsfileld,BEC
+Beitbridge,BBD
+Belville,BLE
+Bislkor,YSK
+Blescorp,BLP
+Bloemfontein,BFX
+Botswana,BOT
+Brits,BTR
+Bulawayo,BLR
+Bushland,DUA
+Bushstick,BUSH
+Bushtick,BUK
+Bushtik,BUK
+Bwanamkubwa,BWA
+Bwana-Mkubwa,BKA
+Capital Park,CPK
+Capital Park Repair Siding,CKH
+Catoridge,COR
+Cement,CMT
+Chambeshi,CBJ
+Chambishi,CBS
+Chicualacuala,CUA
+Chikululu,CLU
+Chililabombwe,HIL
+Chingola,CGL
+Chipongwe,CHG
+Chisamba,CBA
+Choma,CHA
+Chozi,COZ
+City Deep,CDP
+Coega,CGA
+Coligny,COL
+Colleen Bawn,CBN
+Cordelfos,CFS
+Daanskraal,DSL
+Dabuka,DBU
+Dar-es-salaam,DAR
+Debrug,DBG
+Deka,DKA
+Dete,DETE
+Dibangombe,DBI
+DIT Eastcon,EOC
+Durban,DNR
+Dwaalboom,DWAAL
+El Dorado,EDD
+Empangeny,EMG
+Endicott,EDC
+Entuba,ENTUBA
+Ermelo,EML
+Esigodini,ESG
+Fungurume,FG
+Fynlands,FYN
+Germiston,GMR
+Germiston Nord,NRD
+Glencoe,GJO
+Golela,GOL
+Grants,GNT
+Greylingstad,GDR
+Grootspelonke,GSP
+Gwai,GWI
+Gwanda,GAS
+Gweru,GRU
+Hamanskraal,HKR
+Harare,HRE
+Heany,HYA
+Heidelbergt,HGR
+Hoakwe,HWE
+Hoedspruit,HDT
+Hwange ,HWA
+Idinga,IDG
+Igusi,IGS
+Impofu,IMP
+Ingwe,IGW
+Intundla,INT
+Inyantue,IYT
+Isando,ISO
+Islandview,IDL
+Jafuta,JFT
+Jankempdorp,JKP
+Johannesburg,JHB
+Jopempi,JPI
+Jupitor,JUP
+Kaapmeiden,KMD
+Kabwe,KBE
+Kafironda,KAR
+Kafue,KFE
+Kafulafuta,KAF
+Kakanda,KKD
+Kakulu,KLU
+Kalomo,KLO
+Kalukuluku,KLK
+Kaluwe,KLW
+Kamina,KMA
+Kampoyo,KPY
+Kananga,KAN
+Kasama,KSM
+Kasavasa,KVS
+Kashitu,KTU
+Katanino,KTN
+Katbosfontein,KBF
+Kazern,SNO
+Kazuku,KZK
+Kennedy,KDY
+Kingrest,KGX
+Kipushi,KPI
+Kisaki,KSK
+Kisenda,KIS
+Kitwe,KIT
+Koedoespoort,KDS
+Kolwezi,KWI
+Komatipoort,KTR
+Krugers dorp,KGR
+Kurasini,KRS
+Kwekwe,KWE
+Ladaana,LAA
+Langlaagte,LLA
+Langlaagte Sidings,LLX
+Leeuhof,LHF
+Leeuhof Siding,LHH
+Lightenburg,LTX
+Likasi,LKS-DRC
+Lilayi,LYI
+Livingstone,LRS
+Lochinvar,LOC
+Lochnivar,LHV
+Louise Trichardt,LTT
+Luanshimba,LSH
+Luanshya,LUY
+Lubombo,LBO
+Lubudi,LI
+Lubumbashi,LBB
+Luchewe,LCW
+Luena,LNA
+Luisha,LWA
+Lukanda,LAA-RSZ
+Lukosi,LKS-BBR
+Lusaka,LKA
+Lusiwasi,LWS
+Luveve,LVE
+Lwilu,LU
+Mabote,MAB
+Madibogo,MBO
+Mafikeng,MEI
+Magoye,MGY
+Maiden Head,MDH
+Makambako,MKB
+Makasa,MKA
+Mambanje,MAMB
+Manika,MAN
+Mannemead,MNN
+Mapepi,MPP
+Maputo,MPT
+Masonsmill,MAM
+Masue,MSU
+Masuie,MAS
+Masuku,MKU
+Matetsi,MTSI
+Matiaalla,MLA
+Maydonwhaarf,MWF
+Mayoba,MAY
+Mazabuka,MAZ
+Mbalababla,MBL
+Mbeya,MBY
+Miswa,MSW
+Mkhuhlu,MUL
+Mkushi,MKS
+Modder rivier,MRS
+Modimolle,MDM
+Monze,MNZ
+Motive Power Depot,MPD
+Mpika,MPK
+Mpindo,MPI
+Mpopoma,MPO
+Mtubatuba,MTT
+Mufulira,MUF
+Mulimba,MLB-TZR
+Mulobezi,MLB
+Mununga,MNG
+Musinna,MES
+Mutaka,MTK
+Mvuma,MVU
+Mweneditu,MDT
+Mwenzo,MWZ
+Naboomspruit,NBR
+Nakonde,NKD
+Natalspruit,NAS
+Natebe,NAT
+Natuseko,NUK
+Ndola,NDR
+Neganega,NNA
+Nelspruit,NLP
+New Kapiri Mposhi,NKM
+Newcastle,NCX
+Nguba,NBA
+Ngwerere,NWR
+Nkana-Kitwe,NKA
+Nseluka,NKL
+Nyamandlovu,NYA
+Nylstroom (Modimole),NSR
+Ogies,OGS
+Old Kapiri,KPR
+Opblaas,OBS
+Orange River,ORR
+Pemba,EPA
+Phalaborwa,PHW
+Pienaarsrivier,PVR
+Plumtree,PLT
+Polokwane Repair Siding,PHS
+Pongoro,PGR
+Potgietersrus,PTR
+Pretoriawes,PWT
+Pylkop,PYK
+Pyramid,PYD
+Pyramid South,PRZ
+RCBSKoonkaai,RBQ
+Redan,RAN
+Redbank,RBK
+Richards Bay,RCB
+Rodgers,RGS
+Rustenburg,RTR
+Rutenga,RUT
+Sakania,SKN
+Sanbury,SNB
+Sasolberg,SBG
+Saw Mills,SAM
+Schoemansdal,SML
+Scruytsrus,SYU
+Senkobo,SBO
+Sentrarand,STQ
+Sentrarand Repair Siding,SQH
+Serenje,SRJ
+Shipungu,SPG
+Silepu,SHE
+Solomondou,SOM
+Somabhula,SMB
+South Africa,RSA
+Springs,SPR
+Stanmore,SNM
+Tajindunda,TIA
+Tara,Tar
+Tarlton,TLR
+Tenke,TK
+Thomas Junction,TJ
+Triangle,TRI
+Trichardt,TRT
+Triot,TIT
+Tshontanda,TST
+Tzaneen,TZN
+Umbilo,UBO
+Val,VAL
+Varkfontein,VFE
+Vereniging,VER
+Victoria Falls,VF
+Vryburg,VRU
+Walamba,WBA
+Warmbath (Bela Bela),WSR
+Waterpoort,WER
+Watervalboven,WTB
+Welgedag,WED
+Wentworth Park,WWH
+West,WST
+West Nicholson,WNS
+Whitesrun,WHTRUN
+Witbank,WIR
+Yombo,YBO
+Yskor,YCS
+Zaguja,ZGJ
+Zeco,ZECO
+Zimba,ZDA
+Zvishavane,ZVI

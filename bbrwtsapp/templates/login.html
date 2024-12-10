@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BBR Wagon Tracking System</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
+
+<body>
+    <div class="header-container-a">
+        <div class="logo">
+            <img src="{% static 'img/bbrlogo.jpg' %}" alt="BBR Logo">
+        </div>
+        <div class="welcome-message">
+            <h1>Wagon Tracking System</h1>
+            
+        </div>
+        <div class="logout">
+
+        </div>
+    </div>
+
+    <div class="header-container">
+        <h1>Login</h1>
+
+    </div>
+
+    <div id="popuplogin" class="popup">
+        <div class="popup-content">
+            <!--<span class="close" id="close_login_form">&times;</span>-->
+            <p class="popup_dialog_labels_header"></p>
+            <!-- <p class="popup_dialog_labels">1 USD or ZiG equivalent unlimited access for a full week</p> -->
+            <br>
+
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" class="button">Login</button>
+                <!--<button class="button" id="login_close_button">Cancel</button>-->
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

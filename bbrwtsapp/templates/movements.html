@@ -1,0 +1,330 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move Content Between Divs with Semi-Transparent Scrollbars</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80vw;
+            height: 70vh;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dropdown-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .dropdown-label {
+            color: #333;
+            font-size: 1.2rem;
+            margin-right: 20px;
+        }
+
+        .dropdown {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            font-size: 1rem;
+            color: #333;
+            cursor: pointer;
+            width: 200px;
+            text-align: center;
+        }
+
+        .dropdown:hover,
+        .dropdown:focus {
+            border-color: #888;
+            outline: none;
+        }
+
+        .dropdown select {
+            width: 100%;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .top-box {
+            width: 100%;
+            height: 47%;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            color: #333;
+            font-size: 1.5rem;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .top-box .box-title {
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin-bottom: 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background-color: #e0e0e0;
+            padding: 5px;
+            color: #333;
+            font-size: 1rem;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .box-header div {
+            width: 10%;
+            text-align: center;
+        }
+
+        .scrollable-content {
+            overflow-y: auto;
+            max-height: 100%;
+            width: 100%;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
+        }
+
+        .scrollable-content::-webkit-scrollbar {
+            width: 8px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .scrollable-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        #left-box,
+        #right-box {
+            height: 100%;
+        }
+
+        .bottom-row {
+            display: flex;
+            width: 100%;
+            height: 50%;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bottom-box {
+            width: 50%;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            color: #333;
+            font-size: 1.5rem;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .arrow-container {
+            width: 15%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .arrow-container button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            width: 100px;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .arrow-container button:hover {
+            background-color: #ccc;
+        }
+
+        .selectable {
+            background-color: #ffffff;
+            color: #333;
+            margin: 5px 0;
+            padding: 5px;
+            border: 1px solid #ddd;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .selected {
+            background-color: #e0f7fa;
+        }
+
+        .wagon-number,
+        .commodity,
+        .tonnage {
+            width: 30%;
+            text-align: center;
+        }
+
+        .train-no,
+        .from,
+        .to,
+        .dep-date,
+        .dep-time,
+        .arr-date,
+        .arr-time,
+        .loco1,
+        .loco2,
+        .loco3 {
+            width: 10%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="dropdown-container">
+            <div class="dropdown-label">Train Status</div>
+            <div class="dropdown">
+                <select id="status-dropdown">
+                    <option value="Receipt">Receipt</option>
+                    <option value="Transit">Transit</option>
+                    <option value="Exit">Exit</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="top-box">
+            <div class="box-title">Train Information</div>
+            <div class="box-header">
+                <div>Train No.</div>
+                <div>From</div>
+                <div>To</div>
+                <div>Dep Date</div>
+                <div>Dep Time</div>
+                <div>Arr Date</div>
+                <div>Arr Time</div>
+                <div>LOCO#1</div>
+                <div>LOCO#2</div>
+                <div>LOCO#3</div>
+            </div>
+            <div class="scrollable-content" id="scrollable-content">
+
+
+            </div>
+        </div>
+
+        <div class="bottom-row">
+            <div id="left-box" class="bottom-box">
+                <div class="box-title">Available Wagons</div>
+                <div class="box-header">
+                    <div>Wagon No.</div>
+                    <div>Commodity</div>
+                    <div>Tonnage</div>
+                </div>
+                <div class="scrollable-content" id="wagon-scrollable-content">
+
+                </div>
+            </div>
+
+            <div class="arrow-container">
+                <button onclick="moveToRight()">Attach &gt;</button>
+                <button onclick="moveToLeft()">&lt; Detach</button>
+                <button id="save_wagons_state_btn">Save</button>
+            </div>
+
+            <div id="right-box" class="bottom-box">
+                <div class="box-title">Attached Wagons</div>
+                <div class="box-header">
+                    <div>Wagon No.</div>
+                    <div>Commodity</div>
+                    <div>Tonnage</div>
+                </div>
+                <div class="scrollable-content" id="attached-wagons"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to move items from left to right
+        function moveToRight() {
+            let selectedItems = document.querySelectorAll('#left-box .selected');
+            let rightBoxContent = document.querySelector('#right-box .scrollable-content');
+
+            selectedItems.forEach(item => {
+                rightBoxContent.appendChild(item);
+                item.classList.remove('selected');
+            });
+        }
+
+        // Function to move items from right to left
+        function moveToLeft() {
+            let selectedItems = document.querySelectorAll('#right-box .selected');
+            let leftBoxContent = document.querySelector('#left-box .scrollable-content');
+
+            selectedItems.forEach(item => {
+                leftBoxContent.appendChild(item);
+                item.classList.remove('selected');
+            });
+        }
+
+        // Function to toggle selected class
+        document.addEventListener('click', function (e) {
+            if (e.target.closest('.selectable')) {
+                e.target.closest('.selectable').classList.toggle('selected');
+            }
+        });
+
+
+    </script>
+    <script src="{% static 'js/movements.js' %}" defer></script>
+</body>
+
+</html>

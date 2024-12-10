@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move Content Between Divs with Semi-Transparent Scrollbars</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 80vw;
+            height: 70vh;
+            background-color: lightgray;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dropdown-container {
+            width: 100%;
+            background-color: cornflowerblue;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-label {
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 20px;
+        }
+
+        .dropdown {
+            background-color: white;
+            border: 2px solid cornflowerblue;
+            border-radius: 5px;
+            padding: 5px;
+            font-size: 1rem;
+            color: cornflowerblue;
+            cursor: pointer;
+            width: 200px;
+            text-align: center;
+        }
+
+        .dropdown:hover,
+        .dropdown:focus {
+            border-color: darkblue;
+            outline: none;
+        }
+
+        .dropdown select {
+            width: 100%;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            color: cornflowerblue;
+            cursor: pointer;
+        }
+
+        .top-box {
+            width: 100%;
+            height: 47%;
+            background-color: cornflowerblue;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .top-box .box-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background-color: darkred;
+            padding: 5px;
+            color: white;
+            font-size: 1rem;
+            border-bottom: 2px solid black;
+        }
+
+        .box-header div {
+            width: 10%;
+            text-align: center;
+        }
+
+        .scrollable-content {
+            overflow-y: auto;
+            max-height: 100%;
+            width: 100%;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
+        }
+
+        .scrollable-content::-webkit-scrollbar {
+            width: 8px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .scrollable-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        #left-box,
+        #right-box {
+            height: 100%;
+        }
+
+        .bottom-row {
+            display: flex;
+            width: 100%;
+            height: 50%;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bottom-box {
+            width: 50%;
+            background-color: tomato;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            padding: 10px;
+        }
+
+        .arrow-container {
+            width: 15%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .arrow-container button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            width: 100px;
+        }
+
+        .selectable {
+            background-color: white;
+            color: black;
+            margin: 5px 0;
+            padding: 5px;
+            border: 1px solid black;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .selected {
+            background-color: lightblue;
+        }
+
+        .wagon-number,
+        .commodity,
+        .tonnage {
+            width: 30%;
+            text-align: center;
+        }
+
+        .train-no,
+        .from,
+        .to,
+        .dep-date,
+        .dep-time,
+        .arr-date,
+        .arr-time,
+        .loco1,
+        .loco2,
+        .loco3 {
+            width: 10%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="dropdown-container">
+            <div class="dropdown-label">Train Status</div>
+            <div class="dropdown">
+                <select id="status-dropdown">
+                    <option value="receipt">Receipt</option>
+                    <option value="transit">Transit</option>
+                    <option value="exit">Exit</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="top-box">
+            <div class="box-title">Train Information</div>
+            <div class="box-header">
+                <div>Train No.</div>
+                <div>From</div>
+                <div>To</div>
+                <div>Dep Date</div>
+                <div>Dep Time</div>
+                <div>Arr Date</div>
+                <div>Arr Time</div>
+                <div>LOCO#1</div>
+                <div>LOCO#2</div>
+                <div>LOCO#3</div>
+            </div>
+            <div class="scrollable-content">
+                <!-- Add your train information items here -->
+                <div class="selectable">
+                    <div class="train-no">Train 001</div>
+                    <div class="from">City A</div>
+                    <div class="to">City B</div>
+                    <div class="dep-date">01/01/2024</div>
+                    <div class="dep-time">10:00 AM</div>
+                    <div class="arr-date">01/01/2024</div>
+                    <div class="arr-time">2:00 PM</div>
+                    <div class="loco1">LOCO123</div>
+                    <div class="loco2">LOCO124</div>
+                    <div class="loco3">LOCO125</div>
+                </div>
+                <!-- More items can be added here -->
+            </div>
+        </div>
+
+        <div class="bottom-row">
+            <div id="left-box" class="bottom-box">
+                <div class="box-title">Available Wagons</div>
+                <div class="box-header">
+                    <div>Wagon No.</div>
+                    <div>Commodity</div>
+                    <div>Tonnage</div>
+                </div>
+                <div class="scrollable-content">
+                    <div class="selectable">
+                        <div class="wagon-number">Wagon 101</div>
+                        <div class="commodity">Coal</div>
+                        <div class="tonnage">50 T</div>
+                    </div>
+                    <div class="selectable">
+                        <div class="wagon-number">Wagon 102</div>
+                        <div class="commodity">Iron Ore</div>
+                        <div class="tonnage">75 T</div>
+                    </div>
+                    <div class="selectable">
+                        <div class="wagon-number">Wagon 103</div>
+                        <div class="commodity">Grain</div>
+                        <div class="tonnage">60 T</div>
+                    </div>
+                    <div class="selectable">
+                        <div class="wagon-number">Wagon 111</div>
+                        <div class="commodity">Coal</div>
+                        <div class="tonnage">50 T</div>
+                    </div>
+                    <div class="selectable">
+                        <div class="wagon-number">Wagon 112</div>
+                        <div class="commodity">Iron Ore</div>
+                        <div class="tonnage">75 T</div>
+                    </div>
+                    <div class="selectable">
+                        <div class="wagon-number">Wagon 113</div>
+                        <div class="commodity">Grain</div>
+                        <div class="tonnage">60 T</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow-container">
+                <button onclick="moveToRight()">Attach &rarr;</button>
+                <button onclick="moveToLeft()">&larr; Detach</button>
+            </div>
+
+            <div id="right-box" class="bottom-box">
+                <div class="box-title">Selected Wagons</div>
+                <div class="box-header">
+                    <div>Wagon No.</div>
+                    <div>Commodity</div>
+                    <div>Tonnage</div>
+                </div>
+                <div class="scrollable-content">
+                    <div class="selectable">
+                        <div class="wagon-number">Wagon A1</div>
+                        <div class="commodity">Coal</div>
+                        <div class="tonnage">40 T</div>
+                    </div>
+                    <div class="selectable">
+                        <div class="wagon-number">Wagon A2</div>
+                        <div class="commodity">Sand</div>
+                        <div class="tonnage">30 T</div>
+                    </div>
+                    <div class="selectable">
+                        <div class="wagon-number">Wagon A3</div>
+                        <div class="commodity">Limestone</div>
+                        <div class="tonnage">55 T</div>
+                    </div>
+                    <div class="selectable">
+                        <div class="wagon-number">Wagon B1</div>
+                        <div class="commodity">Cement</div>
+                        <div class="tonnage">40 T</div>
+                    </div>
+                    <div class="selectable">
+                        <div class="wagon-number">Wagon B2</div>
+                        <div class="commodity">Sand</div>
+                        <div class="tonnage">30 T</div>
+                    </div>
+                    <div class="selectable">
+                        <div class="wagon-number">Wagon B3</div>
+                        <div class="commodity">Limestone</div>
+                        <div class="tonnage">55 T</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function moveToRight() {
+            const selected = document.querySelector('#left-box .selected');
+            if (selected) {
+                document.querySelector('#right-box .scrollable-content').appendChild(selected);
+                selected.classList.remove('selected');
+            }
+        }
+
+        function moveToLeft() {
+            const selected = document.querySelector('#right-box .selected');
+            if (selected) {
+                document.querySelector('#left-box .scrollable-content').appendChild(selected);
+                selected.classList.remove('selected');
+            }
+        }
+
+        // Add event listeners to selectable items
+        document.querySelectorAll('.selectable').forEach(item => {
+            item.addEventListener('click', function () {
+                this.classList.toggle('selected');
+            });
+        });
+    </script>
+</body>
+
+</html>
